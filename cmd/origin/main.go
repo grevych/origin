@@ -16,8 +16,8 @@ import (
 	"github.com/grevych/gobox/pkg/serviceactivities/gomaxprocs"
 	"github.com/grevych/gobox/pkg/serviceactivities/shutdown"
 	"github.com/grevych/gobox/pkg/trace"
+	"github.com/grevych/origin/internal/config"
 	"github.com/grevych/origin/internal/http"
-	"github.com/grevych/origin/internal/origin"
 	"github.com/grevych/origin/internal/rpc"
 )
 
@@ -45,7 +45,7 @@ func main() { //nolint: funlen // Why: We can't dwindle this down anymore withou
 	env.ApplyOverrides()
 	app.SetName("origin")
 
-	cfg, err := origin.LoadConfig(ctx)
+	cfg, err := config.Load(ctx)
 	if err != nil {
 		log.Error(ctx, "failed to load config", events.NewErrorInfo(err))
 		return
@@ -66,8 +66,8 @@ func main() { //nolint: funlen // Why: We can't dwindle this down anymore withou
 		shutdown.New(),
 		gomaxprocs.New(),
 		automemlimit.New(),
-		http.NewPrivateHTTPService(cfg, &deps.privateHTTP),
-		http.NewPublicHTTPService(cfg, &deps.publicHTTP),
+		http.NewPrivateHTTPServer(cfg, &deps.privateHTTP),
+		http.NewPublicHTTPServer(cfg, &deps.publicHTTP),
 		// rpc.NewGRPCService(cfg, &deps.gRPC),
 	}
 

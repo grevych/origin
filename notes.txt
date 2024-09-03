@@ -1,0 +1,69 @@
+TODO
+----
+- Integrate highlight.io here and somehow connect it to gobox?
+- Use new version of gobox
+- Update shutdown in gobox
+- Bring code from outreach
+  - httpx
+  - grpcx
+- Move service activities to gobox
+-
+
+
+Logs does not work ((este si sirve) bytes written, status code, etc)
+Trailing slashes
+check progress of rootFS. current 29.07 is 367 MB
+Change name to salsasocialclub or maybe have both
+dashboard takes long time to reflect destroyed machines
+check charges on shared ipv4 and ipv6
+learn to use secrets here
+error on otel key
+check if having apps in standby generates charges
+
+
+
+HTTP
+----
+Endpoints by default or customizable should:
+ - trace
+ - rate limit
+ - authenticate (not here)
+ - add custom middleware
+ - log errors
+ - log requests input
+ - handle default 404
+ - error handling accordingly to API 
+ - with proxy 
+ - with async after response
+ - with body available after response
+ - with redirect
+ - ensuring https
+ - with authentication
+ - add headers
+ - add default timeout
+
+Options to add error handler
+ - wrap response writer & loose the rest of the interfaces
+   - Investigate (CloseNotifier, Flusher, Hijacker, or Pusher)
+ - return status code and body so the parent handler write in response. This doesn't allow controllers to have post response tasks
+
+
+  RPC
+  ---
+  - Define api
+  - Forward headers
+
+
+
+setup debugger
+go clean -cache
+go run 
+go build
+go mod
+go vet
+updated dependency
+go get -u github.com/grevych/gobox@2edfbca22e62c5f8d9a5fb1608d223849e218689
+
+
+GOPRIVATE
+make sure your code compiles otherwise it wont be available to be imported within it public pkgs

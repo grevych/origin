@@ -4,7 +4,7 @@ go 1.22.2
 
 require (
 	github.com/gorilla/mux v1.8.1
-	github.com/grevych/gobox v0.0.0-20240630131527-83cabd05a9f2
+	github.com/grevych/gobox v0.0.0-20240701111653-7c3fa371fcf3
 )
 
 require (

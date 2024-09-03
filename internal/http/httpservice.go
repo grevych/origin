@@ -3,6 +3,11 @@ package http
 
 import (
 	"context"
+	"fmt"
+	"net/http"
+
+	"github.com/grevych/gobox/pkg/log"
+	"github.com/grevych/origin/pkg/httpx"
 )
 
 // PrivateHTTPDependencies is used to inject dependencies into the HTTPService service
@@ -11,10 +16,10 @@ import (
 type PrivateHTTPDependencies struct {
 }
 
-// PrivateHTTPService handles internal http requests, suchs as metrics, health
+// PrivateHTTPServer handles internal http requests, suchs as metrics, health
 // and readiness checks. This is required for ALL services to have.
-type PrivateHTTPService struct {
-	// handlers.Service
+type PrivateHTTPServer struct {
+	httpx.Service
 
 	listenHost string
 	listenPort int
@@ -27,9 +32,9 @@ type Config interface {
 	PublicHTTPPort() int
 }
 
-// NewPrivateHTTPService creates a new HTTPService service activity.
-func NewPrivateHTTPService(cfg Config, deps *PrivateHTTPDependencies) *PrivateHTTPService {
-	return &PrivateHTTPService{
+// NewPrivateHTTPServer creates a new HTTPService service activity.
+func NewPrivateHTTPServer(cfg Config, deps *PrivateHTTPDependencies) *PrivateHTTPServer {
+	return &PrivateHTTPServer{
 		listenHost: cfg.ListenHost(),
 		listenPort: cfg.PrivateHTTPPort(),
 		deps:       deps,
@@ -37,11 +42,10 @@ func NewPrivateHTTPService(cfg Config, deps *PrivateHTTPDependencies) *PrivateHT
 }
 
 // Run is the entrypoint for the HTTPService serviceActivity.
-func (s *PrivateHTTPService) Run(ctx context.Context) error {
+func (s *PrivateHTTPServer) Run(ctx context.Context) error {
 	// create a http handler (handlers.Service does metrics, health etc)
-	//s.App = http.NotFoundHandler()
-	// return s.Service.Run(ctx, fmt.Sprintf("%s:%d", s.cfg.ListenHost, s.cfg.HTTPPort))
-	return nil
+	s.App = http.NotFoundHandler()
+	return s.Service.Run(ctx, fmt.Sprintf("%s:%d", s.listenHost, s.listenPort))
 }
 
 // PublicHTTPDependencies is used to inject dependencies into the PublicHTTPService
@@ -51,27 +55,27 @@ func (s *PrivateHTTPService) Run(ctx context.Context) error {
 type PublicHTTPDependencies struct {
 }
 
-// PublicHTTPService handles public http service calls.
-type PublicHTTPService struct {
-	// handlers.PublicService
+// PublicHTTPServer handles public http service calls.
+type PublicHTTPServer struct {
+	httpx.Service
 
 	listenHost string
 	listenPort int
 	deps       *PublicHTTPDependencies
 }
 
-// NewPublicHTTPService creates a new PublicHTTPService service activity.
-func NewPublicHTTPService(cfg Config, deps *PublicHTTPDependencies) *PublicHTTPService {
-	return &PublicHTTPService{
+// NewPublicHTTPServer creates a new PublicHTTPService service activity.
+func NewPublicHTTPServer(cfg Config, deps *PublicHTTPDependencies) *PublicHTTPServer {
+	return &PublicHTTPServer{
 		listenHost: cfg.ListenHost(),
-		listenPort: cfg.PrivateHTTPPort(),
+		listenPort: cfg.PublicHTTPPort(),
 		deps:       deps,
 	}
 }
 
 // Run starts the HTTP service at the host/port specified in the config.
-func (s *PublicHTTPService) Run(ctx context.Context) error {
-	// s.App = Handler()
-	// return s.PublicService.Run(ctx, fmt.Sprintf("%s:%d", s.cfg.ListenHost, s.cfg.PublicHTTPPort))
-	return nil
+func (s *PublicHTTPServer) Run(ctx context.Context) error {
+	s.App = Handler()
+	log.Info(ctx, "starting public http server", log.F{"host": s.listenHost, "port": s.listenPort})
+	return s.Service.Run(ctx, fmt.Sprintf("%s:%d", s.listenHost, s.listenPort))
 }

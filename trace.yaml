@@ -1,0 +1,11 @@
+OpenTelemetry:
+  Enabled: true
+  Endpoint: "https://api.eu1.honeycomb.io"
+  CollectorEndpoint: ""
+  Dataset: "origin"
+  SamplePercent: 1.0
+  Debug: true
+  Stdout: true
+  APIKey:
+    Path: "honeycomb-key"
+
