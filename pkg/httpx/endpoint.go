@@ -14,12 +14,10 @@ func Endpoint(name string, handler http.HandlerFunc) http.Handler {
 		ctx := r.Context()
 		evt := &events.HTTPRequest{}
 		evt.FillFieldsFromRequest(r)
-		// - trace
-		// - handle default 404
+		// TODO: Init tracer
+		// TODO: Handle default 404
 		log.Info(ctx, "http request", evt)
-
-		// - log errors. what do you mean by errors? panics?
-
+		// TODO: Handle panics
 		rec := &ResponseRecorder{
 			ResponseWriter: w,
 		}

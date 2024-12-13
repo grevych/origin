@@ -36,3 +36,11 @@ func (rw *ResponseRecorder) WriteHeader(statusCode int) {
 
 	rw.ResponseWriter.WriteHeader(statusCode)
 }
+
+func (rw *ResponseRecorder) GetBody() []byte {
+	return rw.body
+}
+
+func (rw *ResponseRecorder) GetStatusCode() int {
+	return rw.statusCode
+}
