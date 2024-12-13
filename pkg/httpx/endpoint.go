@@ -2,6 +2,7 @@ package httpx
 
 import (
 	"context"
+	"mime"
 	"net/http"
 
 	"github.com/grevych/gobox/pkg/events"
@@ -58,3 +59,27 @@ func EndpointWithErrorHandler() {}
 
 // - with redirect
 func EndpointWithRedirect() {}
+
+func JSONEndpoint(name string, handler http.HandlerFunc) http.Handler {
+	endpoint := Endpoint(name, handler)
+
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		contentType := r.Header.Get("Content-Type")
+
+		if contentType != "" {
+			mt, _, err := mime.ParseMediaType(contentType)
+			if err != nil {
+				http.Error(w, "Malformed Content-Type header", http.StatusBadRequest)
+				return
+			}
+
+			if mt != "application/json" {
+				http.Error(w, "Content-Type header must be application/json", http.StatusUnsupportedMediaType)
+				return
+			}
+		}
+
+		w.Header().Add("Content-Type", "application/json")
+		endpoint.ServeHTTP(w, r)
+	})
+}
