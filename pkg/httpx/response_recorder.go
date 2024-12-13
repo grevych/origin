@@ -12,8 +12,13 @@ type ResponseRecorder struct {
 	http.ResponseWriter
 
 	statusCode int
-	headers    http.Header
 	body       []byte
+}
+
+func NewResponseRecorder(w http.ResponseWriter) *ResponseRecorder {
+	return &ResponseRecorder{
+		ResponseWriter: w,
+	}
 }
 
 func (rw *ResponseRecorder) Write(p []byte) (n int, err error) {
@@ -22,8 +27,7 @@ func (rw *ResponseRecorder) Write(p []byte) (n int, err error) {
 }
 
 func (rw *ResponseRecorder) Header() http.Header {
-	rw.headers = rw.ResponseWriter.Header()
-	return rw.headers
+	return rw.ResponseWriter.Header()
 }
 
 func (rw *ResponseRecorder) WriteHeader(statusCode int) {

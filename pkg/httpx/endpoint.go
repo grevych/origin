@@ -19,13 +19,11 @@ func Endpoint(name string, handler http.HandlerFunc) http.Handler {
 		// TODO: Handle default 404
 		log.Info(ctx, "http request", evt)
 		// TODO: Handle panics
-		rec := &ResponseRecorder{
-			ResponseWriter: w,
-		}
+		rec := NewResponseRecorder(w)
 		handler.ServeHTTP(rec, r)
 		log.Debug(ctx, "endpoint call", log.F{
 			"requestID":       evt.RequestID,
-			"responseHeaders": rec.headers,
+			"responseHeaders": rec.Header(),
 			"responseBody":    string(rec.body),
 		})
 		evt.FillResponseInfo(len(rec.body), rec.statusCode)
