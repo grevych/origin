@@ -1,10 +1,12 @@
 module github.com/grevych/origin
 
-go 1.23.0
+go 1.23.3
+
+toolchain go1.23.4
 
 require (
 	github.com/gorilla/mux v1.8.1
-	github.com/grevych/gobox v0.0.0-20240701111653-7c3fa371fcf3
+	github.com/grevych/gobox v1.0.0
 )
 
 require (
@@ -38,7 +40,7 @@ require (
 	go.opentelemetry.io/otel/sdk v1.26.0 // indirect
 	go.opentelemetry.io/otel/trace v1.26.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.1.0 // indirect
-	go.uber.org/automaxprocs v1.5.3 // indirect
+	go.uber.org/automaxprocs v1.6.0 // indirect
 	golang.org/x/net v0.38.0 // indirect
 	golang.org/x/sync v0.12.0 // indirect
 	golang.org/x/sys v0.31.0 // indirect
