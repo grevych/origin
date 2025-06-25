@@ -35,6 +35,8 @@ github.com/gorilla/mux v1.8.1 h1:TuBL49tXwgrFYWhqrNgrUNEY92u81SPhu7sTdzQEiWY=
 github.com/gorilla/mux v1.8.1/go.mod h1:AKf9I4AEqPTmMytcMc0KkNouC66V3BtZ4qD5fmWSiMQ=
 github.com/grevych/gobox v0.0.0-20240701111653-7c3fa371fcf3 h1:d/J3uQf82WEov/aWP4VBPMoGanxHcPkMgR65UzWK/G8=
 github.com/grevych/gobox v0.0.0-20240701111653-7c3fa371fcf3/go.mod h1:AlXqTGceszgvI7bMYKKbddnXmSEfmid2HsOVOTs1GNQ=
+github.com/grevych/gobox v1.0.0 h1:vpJEtjE3Z2/SJtErUHV7olLTTuI3juvot/VZas7mTu4=
+github.com/grevych/gobox v1.0.0/go.mod h1:SCfvVfHDvJZGfe2jqz1Z9pgXOHkRRZ4YQv0SbwIdrTM=
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.0 h1:Wqo399gCIufwto+VfwCSvsnfGpF/w5E9CNxSwbpD6No=
 github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.0/go.mod h1:qmOFXW2epJhM0qSnUUYpldc7gVz2KMQwJ/QYCDIa7XU=
 github.com/honeycombio/beeline-go v1.16.0 h1:hJjxbsq6szrv5bGrrRuIg2ayHwJhEKPX/h6Phf/D4Ss=
@@ -87,6 +89,7 @@ go.opentelemetry.io/proto/otlp v1.1.0 h1:2Di21piLrCqJ3U3eXGCTPHE9R8Nh+0uglSnOyxi
 go.opentelemetry.io/proto/otlp v1.1.0/go.mod h1:GpBHCBWiqvVLDqmHZsoMM3C5ySeKTC7ej/RNTae6MdY=
 go.uber.org/automaxprocs v1.5.3 h1:kWazyxZUrS3Gs4qUpbwo5kEIMGe/DAvi5Z4tl2NW4j8=
 go.uber.org/automaxprocs v1.5.3/go.mod h1:eRbA25aqJrxAbsLO0xy5jVwPt7FQnRgjW+efnwa1WM0=
+go.uber.org/automaxprocs v1.6.0/go.mod h1:ifeIMSnPZuznNm6jmdzmU3/bfk01Fe2fotchwEFJ8r8=
 go.uber.org/goleak v1.3.0 h1:2K3zAYmnTNqV73imy9J1T3WC+gmCePx2hEGkimedGto=
 go.uber.org/goleak v1.3.0/go.mod h1:CoHD4mav9JJNrW/WLlf7HGZPjdw8EucARQHekz1X6bE=
 golang.org/x/net v0.38.0 h1:vRMAPTMaeGqVhG5QyLJHqNDwecKTomGeqbnfZyKlBI8=
